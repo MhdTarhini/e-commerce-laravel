@@ -3,9 +3,9 @@
 }
 
 body {
-    background-image: url("../../assets/signup.jpg");
+    background-image: url("../../assets/wp7630075.jpg"); 
     background-size: cover;
-    background-position: center;
+    background-position: center top;
     background-repeat: no-repeat;
     height: 100%;
     width: 100%;
@@ -28,21 +28,20 @@ body {
     color: rgb(73, 255, 70);
 }
 
-
-.container {
+.sign-up-container {
     position: absolute;
     top: 15%;
-    left: 25%;
+    left: 30%;
     background-color: white;
-}
-
-.sign-up-container {
+    border-radius: 20px;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;
     align-items: center;
-    padding: 30px 100px 50px 100px;
-    box-shadow: 0 10px 10px rgb(174, 174, 174)
+    padding: 30px;
+    border: 3px outset rgb(255, 255, 255);
+    border-radius: 20px;
 }
 
 .input-line {
@@ -60,7 +59,7 @@ body {
 .info {
     border: none;
     border-bottom: 1px solid black;
-    width: 350px;
+    width: 300px;
     padding: 20px;
 }
 
@@ -105,7 +104,7 @@ button {
 .bottom-container {
     flex-direction: row-reverse;
     width: 100%;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .pass-error {
@@ -128,7 +127,7 @@ button {
         right: 18%;
     }
 
-    .container {
+    .sign-up-container {
         width: 100%;
         top: 20%;
         left: 20%;
@@ -147,4 +146,9 @@ button {
         display: flex;
        justify-content: space-between;
     }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                .bottom-container {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    flex-direction: column;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    width: 100%;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    justify-content: space-between;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
 }

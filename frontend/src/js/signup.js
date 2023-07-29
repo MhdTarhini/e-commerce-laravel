@@ -8,7 +8,8 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 const repeat_Password = document.getElementById("repeat-password");
 
-async function singUp() {
+async function singUp(event) {
+  event.preventDefault();
   const sign_up_data = new FormData();
   sign_up_data.append("first_name", first_name.value);
   sign_up_data.append("last_name", last_name.value);
@@ -17,13 +18,13 @@ async function singUp() {
   sign_up_data.append("password", password.value);
   // sign_up_data.append("image", "");
 
-  let valid_data = false;
+  let valid_data = 0;
   if (password.value.length < 6) {
     password.style.borderColor = "red";
     document.querySelector(".pass-error").classList.remove("none");
   } else {
     document.querySelector(".pass-error").classList.add("none");
-    valid_data = true;
+    valid_data += 1;
   }
   if (password.value !== repeat_Password.value) {
     password.style.borderColor = "red";
@@ -31,6 +32,7 @@ async function singUp() {
   } else {
     password.style.borderColor = "black";
     repeat_Password.style.borderColor = "black";
+    valid_data += 1;
   }
 
   let check_couter = 0;
@@ -43,7 +45,7 @@ async function singUp() {
     }
   }
   if (check_couter == 5) {
-    valid_data = true;
+    valid_data += 1;
   }
   const checkboxes = document.querySelectorAll(
     'input[type="checkbox"][name="interest"]'
@@ -58,7 +60,7 @@ async function singUp() {
     }
   });
   if (!one_checked) {
-    valid_data = false;
+    valid_data -= 1;
   }
   if (!one_checked) {
     check_question.style.color = "red";
@@ -66,15 +68,33 @@ async function singUp() {
     check_question.style.color = "black";
   }
   // sign_up_data.append("intersted", customer_intersted_cat);
-  if (valid_data) {
+  if (valid_data == 3) {
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/register", {
+      const response = await fetch("localhost:8000/api/register", {
         method: "POST",
         body: sign_up_data,
       });
-      console.log(response);
-      const json = await response.json();
-      console.log(json);
+      window.location.href = "index.html";
+      // localStorage.setItem("userData", JSON.stringify(response.json().user));
+    } catch (error) {
+      console.error(error);
+    }
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/register",
+        sign_up_data
+      );
+      localStorage.setItem("userData", JSON.stringify(response));
+
+      if (response.data.status === "success") {
+        console.log(response.data.message);
+        console.log(response.data.user);
+        console.log(response.data.authorisation.token);
+
+        window.location.href = "index.html";
+      } else {
+        console.error(response.data.message);
+      }
     } catch (error) {
       console.error(error);
     }
