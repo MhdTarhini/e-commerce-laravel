@@ -32,7 +32,7 @@ body {
 .container {
     position: absolute;
     top: 15%;
-        left: 20%;
+    left: 25%;
     background-color: white;
 }
 
@@ -88,9 +88,9 @@ button {
 }
 
 .checkboxes {
-
     gap: 15px;
 }
+
 
 .bottom-container {
     flex-direction: row-reverse;
@@ -112,7 +112,9 @@ button {
 
     .container {
         width: 100%;
-        top: 20%
+        top: 20%;
+        left: 20%;
+
     }
 
     .checkboxes {
@@ -122,5 +124,9 @@ button {
     .welcome {
         display: block;
         margin-top: 10px;
+    }
+    .one-check {
+        display: flex;
+       justify-content: space-between;
     }
 }
