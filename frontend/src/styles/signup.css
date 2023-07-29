@@ -110,8 +110,9 @@ button {
 @media (max-width:497px) {
     .logo {
         left: 50%;
-        top: 0;
+        top: 2%;
         margin: 0;
+        z-index: 1;
     }
 
     body {
