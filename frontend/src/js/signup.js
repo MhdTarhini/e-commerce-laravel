@@ -76,7 +76,7 @@ async function singUp() {
       const json = await response.json();
       console.log(json);
     } catch (error) {
-      console.erroe(error);
+      console.error(error);
     }
   }
 }

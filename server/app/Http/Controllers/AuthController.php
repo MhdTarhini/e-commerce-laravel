@@ -52,14 +52,14 @@ class AuthController extends Controller
         ]);
 
         $user = User::create([
-            'first_name' => $request->input('first-name'),
-            'last_name' => $request->input('last-name'),
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
             'address' => $request->input('address'),
-            'image' => $request->input('image'), 
+            'image' => '', 
             'number_of_visit' => 0,
-            'role_id' => 1,
+            'role_id' => 2,
         ]);
 
         $token = Auth::login($user);
