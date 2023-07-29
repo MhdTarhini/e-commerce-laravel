@@ -1,22 +1,30 @@
-const sign_up_btn = document.querySelector(".button");
+const sign_up_btn = document.querySelector("button");
 sign_up_btn.addEventListener("click", singUp);
 
-const first_name = document.getElementById("first-name");
-const last_name = document.getElementById("last-name");
+const first_name = document.getElementById("first_name");
+const last_name = document.getElementById("last_name");
 const address = document.getElementById("address");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const repeat_Password = document.getElementById("repeat-password");
-const sign_up_data = new FormData();
 
 async function singUp() {
-  sign_up_data.append("first-name", first_name.value);
-  sign_up_data.append("last-name", last_name.value);
+  const sign_up_data = new FormData();
+  sign_up_data.append("first_name", first_name.value);
+  sign_up_data.append("last_name", last_name.value);
   sign_up_data.append("address", address.value);
   sign_up_data.append("email", email.value);
   sign_up_data.append("password", password.value);
-  // e.preventDefault();
+  // sign_up_data.append("image", "");
+
   let valid_data = false;
+  if (password.value.length < 6) {
+    password.style.borderColor = "red";
+    document.querySelector(".pass-error").classList.remove("none");
+  } else {
+    document.querySelector(".pass-error").classList.add("none");
+    valid_data = true;
+  }
   if (password.value !== repeat_Password.value) {
     password.style.borderColor = "red";
     repeat_Password.style.borderColor = "red";
@@ -46,7 +54,6 @@ async function singUp() {
   checkboxes.forEach((ele) => {
     if (ele.checked) {
       customer_intersted_cat.push(ele.value);
-      console.log(customer_intersted_cat);
       one_checked = true;
     }
   });
@@ -58,8 +65,20 @@ async function singUp() {
   } else {
     check_question.style.color = "black";
   }
-  sign_up_data.append("intersted", customer_intersted_cat);
-  console.log(valid_data);
+  // sign_up_data.append("intersted", customer_intersted_cat);
+  if (valid_data) {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/register", {
+        method: "POST",
+        body: sign_up_data,
+      });
+      console.log(response);
+      const json = await response.json();
+      console.log(json);
+    } catch (error) {
+      console.erroe(error);
+    }
+  }
 }
 const labels = document.querySelectorAll(".label");
 labels.forEach((ele) => {

@@ -80,7 +80,7 @@ label.active{
 }
 button {
     border: none;
-    padding: 15px;
+    padding: 10px 20px;
     background-color: rgb(73, 255, 70);
     color: white;
     font-size: 15px;
@@ -93,12 +93,13 @@ button {
     flex-direction: column;
     gap: 10px;
     justify-content: flex-start;
-    width: 87%;
+    width: 100%;
 }
 
 .checkboxes {
     gap: 15px;
 }
+
 
 
 .bottom-container {
@@ -107,6 +108,13 @@ button {
     justify-content: space-around;
 }
 
+.pass-error {
+    color: red;
+}
+
+.pass-error.none {
+    display: none;
+}
 @media (max-width:497px) {
     .logo {
         left: 50%;
