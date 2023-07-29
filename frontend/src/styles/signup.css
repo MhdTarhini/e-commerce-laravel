@@ -67,7 +67,16 @@ body {
 input:focus {
     outline: none;
     border-color: rgb(73, 255, 70);
-    ;
+}
+.label{
+    opacity: 0;
+    transition: opacity 0.5s ease
+
+}
+label.active{
+    opacity: 1;
+    color: rgb(73, 255, 70);;
+
 }
 button {
     border: none;

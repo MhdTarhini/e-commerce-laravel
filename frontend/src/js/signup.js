@@ -1,13 +1,20 @@
 const sign_up_btn = document.querySelector("button");
 sign_up_btn.addEventListener("click", singUp);
 
+const first_name = document.getElementById("first-name");
+const last_name = document.getElementById("last-name");
+const address = document.getElementById("address");
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+const repeat_Password = document.getElementById("repeat-password");
+const sign_up_data = new FormData();
+sign_up_data.append("first-name", first_name.value);
+sign_up_data.append("last-name", last_name.value);
+sign_up_data.append("address", address.value);
+sign_up_data.append("email", email.value);
+sign_up_data.append("password", password.value);
+
 function singUp() {
-  const first_name = document.getElementById("first-name");
-  const last_name = document.getElementById("last-name");
-  const address = document.getElementById("address");
-  const email = document.getElementById("email");
-  const password = document.getElementById("password");
-  const repeat_Password = document.getElementById("repeat-password");
   let valid_data = false;
   if (password.value !== repeat_Password.value) {
     password.style.borderColor = "red";
@@ -16,12 +23,6 @@ function singUp() {
     password.style.borderColor = "black";
     repeat_Password.style.borderColor = "black";
   }
-  const sign_up_data = new FormData();
-  sign_up_data.append("first-name", first_name.value);
-  sign_up_data.append("last-name", last_name.value);
-  sign_up_data.append("address", address.value);
-  sign_up_data.append("email", email.value);
-  sign_up_data.append("password", password.value);
 
   let check_couter = 0;
   for (const [key, value] of sign_up_data.entries()) {
@@ -59,3 +60,18 @@ function singUp() {
   sign_up_data.append("intersted", customer_intersted_cat);
   console.log(valid_data);
 }
+const labels = document.querySelectorAll(".label");
+labels.forEach((ele) => {
+  let label_for = ele.getAttribute("for");
+  let input = document.getElementById(`${label_for}`);
+  input.addEventListener("focus", () => {
+    ele.classList.add("active");
+    input.removeAttribute("placeholder");
+  });
+  document.getElementById(`${label_for}`).addEventListener("blur", () => {
+    ele.classList.remove("active");
+    input.setAttribute("placeholder", `${ele.innerHTML}`);
+  });
+});
+
+
