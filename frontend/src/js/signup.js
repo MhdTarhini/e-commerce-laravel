@@ -1,4 +1,4 @@
-const sign_up_btn = document.querySelector("button");
+const sign_up_btn = document.querySelector(".button");
 sign_up_btn.addEventListener("click", singUp);
 
 const first_name = document.getElementById("first-name");
@@ -8,13 +8,14 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 const repeat_Password = document.getElementById("repeat-password");
 const sign_up_data = new FormData();
-sign_up_data.append("first-name", first_name.value);
-sign_up_data.append("last-name", last_name.value);
-sign_up_data.append("address", address.value);
-sign_up_data.append("email", email.value);
-sign_up_data.append("password", password.value);
 
-function singUp() {
+async function singUp() {
+  sign_up_data.append("first-name", first_name.value);
+  sign_up_data.append("last-name", last_name.value);
+  sign_up_data.append("address", address.value);
+  sign_up_data.append("email", email.value);
+  sign_up_data.append("password", password.value);
+  // e.preventDefault();
   let valid_data = false;
   if (password.value !== repeat_Password.value) {
     password.style.borderColor = "red";
@@ -73,5 +74,3 @@ labels.forEach((ele) => {
     input.setAttribute("placeholder", `${ele.innerHTML}`);
   });
 });
-
-

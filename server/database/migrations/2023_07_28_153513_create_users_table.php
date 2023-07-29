@@ -1,3 +1,5 @@
+
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -11,15 +13,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('first-name');
+            $table->string('last-name');
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
-            $table->timestamps();
+            $table->string('address');
+            $table->string('image');
+            $table->string('number-of-visit');
             $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -28,7 +34,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('users');
 
     }
 };
+
