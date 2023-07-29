@@ -8,6 +8,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     height: 100%;
+    width: 100%;
 }
 
 .logo {
@@ -22,6 +23,7 @@ body {
     padding: 30px;
 }
 
+
 .welcome {
     color: rgb(73, 255, 70);
 }
@@ -29,8 +31,8 @@ body {
 
 .container {
     position: absolute;
-    top: 20%;
-    left: 25%;
+    top: 15%;
+        left: 20%;
     background-color: white;
 }
 
@@ -46,6 +48,7 @@ body {
 .input-line {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 .input {
@@ -54,10 +57,10 @@ body {
     gap: 10px;
 }
 
-input {
+.info {
     border: none;
     border-bottom: 1px solid black;
-    width: 300px;
+    width: 350px;
     padding: 20px;
 }
 
@@ -65,4 +68,59 @@ input:focus {
     outline: none;
     border-color: rgb(73, 255, 70);
     ;
+}
+button {
+    border: none;
+    padding: 15px;
+    background-color: rgb(73, 255, 70);
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.check {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: flex-start;
+    width: 87%;
+}
+
+.checkboxes {
+
+    gap: 15px;
+}
+
+.bottom-container {
+    flex-direction: row-reverse;
+    width: 100%;
+    justify-content: space-around;
+}
+
+@media (max-width:497px) {
+    .logo {
+        left: 50%;
+        top: 0;
+        margin: 0;
+    }
+
+    body {
+        position: absolute;
+        right: 18%;
+    }
+
+    .container {
+        width: 100%;
+        top: 20%
+    }
+
+    .checkboxes {
+        display: block;
+    }
+
+    .welcome {
+        display: block;
+        margin-top: 10px;
+    }
 }
