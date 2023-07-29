@@ -69,16 +69,16 @@ async function singUp(event) {
   }
   // sign_up_data.append("intersted", customer_intersted_cat);
   if (valid_data == 3) {
-    try {
-      const response = await fetch("localhost:8000/api/register", {
-        method: "POST",
-        body: sign_up_data,
-      });
-      window.location.href = "index.html";
-      // localStorage.setItem("userData", JSON.stringify(response.json().user));
-    } catch (error) {
-      console.error(error);
-    }
+    // try {
+    //   const response = await fetch("localhost:8000/api/register", {
+    //     method: "POST",
+    //     body: sign_up_data,
+    //   });
+    //   window.location.href = "index.html";
+    //   // localStorage.setItem("userData", JSON.stringify(response.json().user));
+    // } catch (error) {
+    //   console.error(error);
+    // }
     try {
       const response = await axios.post(
         "http://localhost:8000/api/register",

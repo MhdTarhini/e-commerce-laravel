@@ -30,6 +30,9 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
+        $userModel = User::find($user->id);
+        $userModel->number_of_visit = $userModel->number_of_visit + 1;
+        $userModel->save();
         return response()->json([
                 'status' => 'success',
                 'user' => $user,
@@ -41,38 +44,40 @@ class AuthController extends Controller
 
     }
 
-    public function register(Request $request){
-        $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
-            'address' => 'required|string|max:255',
-            'image' => 'nullable|string', 
-        ]);
+    public function register(Request $request)
+{
+    $request->validate([
+        'first_name' => 'required|string|max:255',
+        'last_name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:6',
+        'address' => 'required|string|max:255',
+        'image' => 'nullable|string', 
+    ]);
 
-        $user = User::create([
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
-            'address' => $request->input('address'),
-            'image' => '', 
-            'number_of_visit' => 0,
-            'role_id' => 2,
-        ]);
+    $user = User::create([
+        'first_name' => $request->input('first_name'),
+        'last_name' => $request->input('last_name'),
+        'email' => $request->input('email'),
+        'password' => Hash::make($request->input('password')),
+        'address' => $request->input('address'),
+        'image' => '', 
+        'number_of_visit' => 0,
+        'role_id' => 2,
+    ]);
 
-        $token = Auth::login($user);
-        return response()->json([
-            'status' => 'success',
-            'message' => 'User created successfully',
-            'user' => $user,
-            'authorisation' => [
-                'token' => $token,
-                'type' => 'bearer',
-            ]
-        ]);
-    }
+    $token = Auth::login($user);
+    return response()->json([
+        'status' => 'success',
+        'message' => 'User created successfully',
+        'user' => $user,
+        'authorisation' => [
+            'token' => $token,
+            'type' => 'bearer',
+        ]
+    ]);
+}
+
 
     public function logout()
     {
