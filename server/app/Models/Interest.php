@@ -9,4 +9,11 @@ class Interest extends Model
 {
     use HasFactory;
     protected $fillable = ['user_id', 'category_id'];
+
+
+    public function products()
+    {
+       return $this->hasMany(Product::class, 'category_id', 'category_id');
+    }
+
 }

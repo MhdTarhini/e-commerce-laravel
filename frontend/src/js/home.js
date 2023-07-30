@@ -9,14 +9,13 @@ document.querySelector(".for-you").addEventListener("click", () => {
   window.location.href = "../pages/home.html?page=for-you";
 });
 
-async function fetchproducts() {
+async function fetchproducts(path) {
   try {
-    const response = await axios.get(
-      "http://127.0.0.1:8000/api/get_all_products"
-    );
+    const response = await axios.get(`http://127.0.0.1:8000/api/${path}`);
     const products = await response.data.products;
     localStorage.setItem("products", JSON.stringify(products));
     displayProducts(products);
+    console.log(products);
   } catch (error) {
     console.error(error);
   }
@@ -50,7 +49,8 @@ function displayProducts(products) {
   });
 }
 if (page_param !== "for-you") {
-  fetchproducts();
+  fetchproducts("get_all_products");
 } else {
   id = 6;
+  fetchproducts("user_interest/6");
 }
