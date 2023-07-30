@@ -7,6 +7,7 @@ use Lcobucci\JWT\Signer\Ecdsa\SignatureConverter;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriesContoller;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ Route::controller(AuthController::class)->group(function () {
 
 });
 
+Route::get("/get_all_users",[UsersController::class,"getUsers"]);
 Route::post("/edit_product/{id?}",[ProductsController::class,"editProduct"]);
 Route::delete("/delete_product/{id?}",[ProductsController::class,"deleteProduct"]);
 Route::get("/get_all_products",[ProductsController::class,"getProducts"]);
