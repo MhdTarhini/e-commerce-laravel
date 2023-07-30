@@ -1,0 +1,178 @@
+* {
+    box-sizing: border-box;
+}
+
+body,
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px 0px 10px;
+    border-bottom: 1px outset rgb(25, 66, 25);
+    background-image: url("../../assets/wp7630075.jpg");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    border-radius: 0px 0px 10px 10px;
+}
+
+
+.logo {
+    font-size: 40px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(73, 255, 70);
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.558);
+    word-spacing: 10px;
+    padding: 10px 15px;
+    margin: 0px 0px 10px 10px;
+}
+
+.profile-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.navigation-side {
+    display: flex;
+    /* gap: 70px; */
+    align-items: center;
+    justify-content: center;
+
+}
+
+.navigation-side div {
+    display: flex;
+    /* gap: 70px; */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20px;
+    flex: 1;
+    padding: 0px 40px;
+    height: 100%;
+}
+
+.navigation-side div:hover {
+    background-color: rgba(0, 0, 0, 0.047);
+    /* font-size: 20px;
+    height: 100%; */
+}
+
+/* .logo-page {
+    position: absolute;
+    left: 10%;
+    top: 30%;
+    font-size: 70px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(0, 242, 44);
+    border-radius: 10px;
+    word-spacing: 10px;
+    padding: 10px 15px;
+    margin: 0px 0px 10px 10px;
+    width: 250px;
+    z-index: 1;
+    font-weight: 700;
+} */
+
+/* .image-slider {
+    background-image: url('../../assets/1495.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 700px;
+    animation: slider 10s infinite
+}
+
+@keyframes slider {
+    0% {
+        background-image: url('../../assets/electronics.jpg');
+    }
+
+    50% {
+        background-image: url('../../assets/jewelry.jpg');
+    }
+
+    100% {
+        background-image: url('../../assets/man-clothes.jpg');
+    }
+} */
+
+.top-page {
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
+    margin: auto;
+    padding: 20px;
+    align-items: center;
+}
+
+.top-page span {
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+}
+
+.top-page span:hover {
+    background-color: rgba(0, 0, 0, 0.095);
+}
+
+.products-container {
+    padding: 40px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    border: 3px solid black;
+    border-radius: 30px;
+    width: 300px;
+    height: 350px;
+    transition: height 2s;
+}
+
+.product-card:hover {
+    width: 300px;
+    height: 200px;
+}
+
+.top-side {
+    border-radius: 30px;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.top-side img {
+    border-radius: 30px;
+    width: 100%;
+    height: 100%;
+}
+
+
+.product-details {
+    position: absolute;
+    background-color: rgba(178, 178, 178, 0.926);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 10px;
+    align-items: center;
+    border-radius: 30px;
+    width: 280px;
+    height: 340px;
+    border: 1px solid rgb(159, 159, 159);
+}
