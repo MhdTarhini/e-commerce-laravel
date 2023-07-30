@@ -1,4 +1,4 @@
-const sign_up_btn = document.querySelector("button");
+const sign_up_btn = document.querySelector(".button");
 sign_up_btn.addEventListener("click", singUp);
 
 const first_name = document.getElementById("first_name");
@@ -84,14 +84,10 @@ async function singUp(event) {
         "http://localhost:8000/api/register",
         sign_up_data
       );
-      localStorage.setItem("userData", JSON.stringify(response));
+      localStorage.setItem("userData", JSON.stringify(response.data.user));
 
       if (response.data.status === "success") {
-        console.log(response.data.message);
-        console.log(response.data.user);
-        console.log(response.data.authorisation.token);
-
-        window.location.href = "index.html";
+        window.location.href = "../../index.com";
       } else {
         console.error(response.data.message);
       }

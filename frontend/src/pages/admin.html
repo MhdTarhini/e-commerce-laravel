@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/admin.css">
+    <title>admin Dashbord</title>
+</head>
+
+<body>
+    <div class="nav-container">
+        <div class="logo-side">
+            <div class="logo">LS</div>
+        </div>
+        <div class="navigation-side">
+            <div class="cat-nav">Products</div>
+            <div class="cart-nav">Users</div>
+        </div>
+        <div class="user-info">
+            <img src="../../assets/1495.jpg" class="profile-img" alt="" srcset="">
+        </div>
+    </div>
+    <div class="products-container">
+        <div class="products-table">
+            <table>
+                <thead>
+                    <tr class="top-table">
+                        <th>ID</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>${id}</td>
+                        <td><img src=${image} alt="Product 1"></td>
+                        <td>${name}</td>
+                        <td>${description}</td>
+                        <td>${price}$</td>
+                        <td>${category}</td>
+                        <td>
+                            <button>Edit</button>
+                            <button>Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/admin.js"></script>
+</body>
+
+</html>
