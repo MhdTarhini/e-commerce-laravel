@@ -11,13 +11,13 @@ labels.forEach((ele) => {
     input.setAttribute("placeholder", `${ele.innerHTML}`);
   });
 });
-const logo = document.querySelector(".logo");
-const body = document.querySelector("body");
-logo.addEventListener("click", () => {
-  logo.classList.add("go");
-  body.classList.add("go");
-  document.querySelector(".sign-in-container").classList.remove("none");
-});
+// const logo = document.querySelector(".logo");
+// const body = document.querySelector("body");
+// logo.addEventListener("click", () => {
+//   logo.classList.add("go");
+//   body.classList.add("go");
+//   document.querySelector(".sign-in-container").classList.remove("none");
+// });
 
 const sign_in_btn = document.querySelector(".sign-in-btn");
 sign_in_btn.addEventListener("click", signIn);
@@ -34,7 +34,7 @@ async function signIn() {
       sign_up_data
     );
 
-    //   localStorage.setItem("userData", JSON.stringify(response));
+    // localStorage.setItem("userData", JSON.stringify(response));
 
     if (response.data.status === "success") {
       console.log(response.data.user);

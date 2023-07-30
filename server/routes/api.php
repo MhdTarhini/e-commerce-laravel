@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Lcobucci\JWT\Signer\Ecdsa\SignatureConverter;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoriesContoller;
+use App\Http\Controllers\ProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +27,10 @@ Route::controller(AuthController::class)->group(function () {
 
 });
 
+Route::get("/get_all_products",[ProductsController::class,"getProducts"]);
+Route::get("/get_all_categories",[CategoriesContoller::class,"getCategories"]);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });

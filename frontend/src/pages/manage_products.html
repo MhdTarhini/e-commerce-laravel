@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/manage_products.css">
+    <title>Manage PRoducts</title>
+</head>
+
+<body>
+    <div class="nav-container">
+        <div class="logo-side">
+            <div class="logo">LS</div>
+        </div>
+        <div class="navigation-side">
+            <div class="cat-nav">Products</div>
+            <div class="cart-nav">Users</div>
+        </div>
+        <div class="user-info">
+            <img src="../../assets/1495.jpg" class="profile-img" alt="" srcset="">
+        </div>
+    </div>
+    <div class="manage-product-container">
+        <div class="input-line">
+            <div class="input">
+                <label for="image">image</label>
+                <input type="file" name="image" class="info" id="image">
+            </div>
+        </div>
+        <div class="input-line">
+            <div class="input">
+                <label for="name" class="label">name</label>
+                <input type="text" name="name" class="info" id="name" placeholder="name">
+            </div>
+            <div class="input">
+                <label for="Price" class="label">Price</label>
+                <input type="text" name="Price" class="info" id="Price" placeholder="Price $">
+            </div>
+        </div>
+        <div class="check">
+            <label for="interst" class="check-question">catergory</label>
+            <div class="input-line checkboxes">
+                <div class="one-check">
+                    <label for="man">Man</label>
+                    <input type="checkbox" name="interest" id="man" value="man">
+                </div>
+                <div class="one-check">
+                    <label for="woman">Woman</label>
+                    <input type="checkbox" name="interest" id=" interst woman" value="woman">
+                </div>
+                <div class="one-check">
+                    <label for="woman">tech</label>
+                    <input type="checkbox" name="interest" id=" interst woman" value="tech">
+                </div>
+                <div class="one-check">
+                    <label for="woman">kids</label>
+                    <input type="checkbox" name="interest" id=" interst woman" value="kids">
+                </div>
+                <div class="one-check">
+                    <label for="woman">jewlery</label>
+                    <input type="checkbox" name="interest" id=" interst woman" value="jewlery">
+                </div>
+            </div>
+        </div>
+        <div class="input">
+            <label for="decription" class="label">decription</label>
+            <textarea id="decription" name="decription" rows="4" cols="50" placeholder="Description"></textarea><br>
+        </div>
+    </div>
+    <div class="input-line bottom-container">
+        <div type="button" class="button">Signup</div>
+        <script src="../js/manage_products.js"></script>
+</body>
+
+</html>

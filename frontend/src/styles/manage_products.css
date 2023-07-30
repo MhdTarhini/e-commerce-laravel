@@ -1,0 +1,202 @@
+* {
+    box-sizing: border-box;
+}
+
+body,
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px 0px 10px;
+    border-bottom: 1px outset rgb(25, 66, 25);
+    background-image: url("../../assets/wp7630075.jpg");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    border-radius: 0px 0px 10px 10px;
+}
+
+
+.logo {
+    font-size: 40px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(73, 255, 70);
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.558);
+    word-spacing: 10px;
+    padding: 10px 15px;
+    margin: 0px 0px 10px 10px;
+}
+
+.profile-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.navigation-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.navigation-side div {
+    display: flex;
+    /* gap: 70px; */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20px;
+    flex: 1;
+    padding: 0px 40px;
+    height: 100%;
+}
+
+.navigation-side div:hover {
+    background-color: rgb(73, 255, 70);
+}
+
+
+.manage-product-container {
+    position: absolute;
+    top: 15%;
+    left: 30%;
+    background-color: white;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    align-items: center;
+    padding: 30px;
+    border: 3px outset rgb(255, 255, 255);
+    border-radius: 20px;
+}
+
+#image {
+    border: none;
+}
+
+.input-line {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.info {
+    flex: 1;
+    border: none;
+    border-bottom: 1px solid black;
+    width: 200px;
+    padding: 20px;
+}
+
+input:focus {
+    outline: none;
+    border-color: rgb(73, 255, 70);
+}
+
+.label {
+    opacity: 0;
+    transition: opacity 0.5s ease
+}
+
+label.active {
+    opacity: 1;
+    color: rgb(73, 255, 70);
+    ;
+
+}
+
+button {
+    border: none;
+    padding: 10px 20px;
+    background-color: rgb(73, 255, 70);
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.check {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* justify-content: flex-start; */
+    width: 100%;
+}
+
+.checkboxes {
+    gap: 15px;
+    flex-direction: row;
+}
+
+
+
+.bottom-container {
+    flex-direction: row-reverse;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.pass-error {
+    color: red;
+}
+
+.pass-error.none {
+    display: none;
+}
+
+@media (max-width:497px) {
+    .logo {
+        left: 50%;
+        top: 2%;
+        margin: 0;
+        z-index: 1;
+    }
+
+    body {
+        position: absolute;
+        right: 18%;
+    }
+
+    .sign-up-container {
+        width: 100%;
+        top: 20%;
+        left: 20%;
+
+    }
+
+    .checkboxes {
+        display: block;
+    }
+
+    .welcome {
+        display: block;
+        margin-top: 10px;
+    }
+
+    .one-check {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .bottom-container {
+        flex-direction: column;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
