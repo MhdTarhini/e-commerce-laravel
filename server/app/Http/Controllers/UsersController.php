@@ -11,4 +11,11 @@ class UsersController extends Controller
         $users=User::get();
         return response()->json(['status' => 'success','users'=>$users]);
     }
+    function makeAdmin($id){
+        $user=User::find($id);
+        $user->role_id = 1;
+        $user->save();
+        return response()->json(['status' => 'success','users'=>$user]);
+
+    }
 }
