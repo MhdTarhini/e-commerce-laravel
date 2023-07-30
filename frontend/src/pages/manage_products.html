@@ -34,32 +34,21 @@
                 <input type="text" name="name" class="info" id="name" placeholder="name">
             </div>
             <div class="input">
-                <label for="Price" class="label">Price</label>
-                <input type="text" name="Price" class="info" id="Price" placeholder="Price $">
+                <label for="price" class="label">Price</label>
+                <input type="text" name="Price" class="info" id="price" placeholder="Price $">
             </div>
         </div>
         <div class="check">
             <label for="interst" class="check-question">catergory</label>
+            <span class="check-err none">only one category</span>
             <div class="input-line checkboxes">
                 <div class="one-check">
                     <label for="man">Man</label>
-                    <input type="checkbox" name="interest" id="man" value="man">
+                    <input type="checkbox" name="interest" id="1" value="man clothes">
                 </div>
                 <div class="one-check">
                     <label for="woman">Woman</label>
-                    <input type="checkbox" name="interest" id=" interst woman" value="woman">
-                </div>
-                <div class="one-check">
-                    <label for="woman">tech</label>
-                    <input type="checkbox" name="interest" id=" interst woman" value="tech">
-                </div>
-                <div class="one-check">
-                    <label for="woman">kids</label>
-                    <input type="checkbox" name="interest" id=" interst woman" value="kids">
-                </div>
-                <div class="one-check">
-                    <label for="woman">jewlery</label>
-                    <input type="checkbox" name="interest" id=" interst woman" value="jewlery">
+                    <input type="checkbox" name="interest" id="2" value="woman clothes">
                 </div>
             </div>
         </div>
@@ -67,10 +56,12 @@
             <label for="decription" class="label">decription</label>
             <textarea id="decription" name="decription" rows="4" cols="50" placeholder="Description"></textarea><br>
         </div>
-    </div>
-    <div class="input-line bottom-container">
-        <div type="button" class="button">Signup</div>
-        <script src="../js/manage_products.js"></script>
+        <div class="input-line bottom-container">
+            <button type="button" class="button">add Product</button>
+            </div>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+            <script src="../js/manage_products.js"></script>
 </body>
 
 </html>

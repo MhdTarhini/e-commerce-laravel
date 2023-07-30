@@ -11,6 +11,7 @@ labels.forEach((ele) => {
     input.setAttribute("placeholder", `${ele.innerHTML}`);
   });
 });
+
 // const logo = document.querySelector(".logo");
 // const body = document.querySelector("body");
 // logo.addEventListener("click", () => {

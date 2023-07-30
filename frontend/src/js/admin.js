@@ -1,3 +1,8 @@
+const users_nav = document.querySelector(".users-nav");
+users_nav.addEventListener("click", () => {
+  window.location.href = "users_admin.html";
+});
+
 let categories_obj = {};
 async function fetchCategories() {
   try {
@@ -8,7 +13,7 @@ async function fetchCategories() {
     categories.forEach((category) => {
       categories_obj[category.id] = category.category;
     });
-    console.log(categories_obj);
+    localStorage.setItem("categories", JSON.stringify(categories));
   } catch (error) {
     console.error(error);
   }
@@ -25,8 +30,8 @@ function productsFrom(id, image, name, description, price, category) {
             <td>${price}$</td>
             <td>${category}</td>
             <td>
-                <button class="edit">Edit</button>
-                <button class="delete">Delete</button>
+                <button class="edit-${id}">Edit</button>
+                <button class="delete-${id}">Delete</button>
             </td>
         </tr>`;
 }
@@ -55,12 +60,27 @@ function displayProducts(products) {
       categories_obj[product.category_id]
     );
     table_body.appendChild(tr);
-    const edit_btn = document.querySelector(".edit");
-    const delete_btn = document.querySelector(".delete");
+    const edit_btn = document.querySelector(`.edit-${product.id}`);
+    const delete_btn = document.querySelector(`.delete-${product.id}`);
     edit_btn.addEventListener("click", () => {
-      window.location.href = `manage_products.html?${product.id}`;
+      window.location.href = `manage_products.html?id=${product.id}`;
+    });
+    delete_btn.addEventListener("click", async () => {
+      try {
+        const reposnse = await axios.delete(
+          `http://127.0.0.1:8000/api/delete_product/${product.id}`
+        );
+        if (reposnse.data.status == "success") {
+          window.location.href = "admin.html";
+        }
+      } catch (error) {
+        console.error(error);
+      }
     });
   });
 }
 
 fetchproducts();
+document.querySelector(".new-product").addEventListener("click", () => {
+  window.location.href = `manage_products.html`;
+});
