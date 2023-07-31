@@ -12,14 +12,6 @@ labels.forEach((ele) => {
   });
 });
 
-// const logo = document.querySelector(".logo");
-// const body = document.querySelector("body");
-// logo.addEventListener("click", () => {
-//   logo.classList.add("go");
-//   body.classList.add("go");
-//   document.querySelector(".sign-in-container").classList.remove("none");
-// });
-
 const sign_in_btn = document.querySelector(".sign-in-btn");
 sign_in_btn.addEventListener("click", signIn);
 
@@ -34,11 +26,14 @@ async function signIn() {
       "http://localhost:8000/api/login",
       sign_up_data
     );
-    console.log(response);
     if (response.data.status === "success") {
       localStorage.setItem("userData", JSON.stringify(response.data.user));
       localStorage.setItem("auth", JSON.stringify(response.data.authorisation));
-      window.location.href = "src/pages/home.html";
+      if (response.data.user.role_id == 1) {
+        window.location.href = "src/pages/admin.html";
+      } else {
+        window.location.href = "src/pages/home.html";
+      }
     } else {
       console.error(response.data.message);
     }

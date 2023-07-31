@@ -1,6 +1,12 @@
 const auth = JSON.parse(localStorage.getItem("auth"));
 axios.defaults.headers.common["Authorization"] = `Bearer ${auth.token}`;
-const userData = JSON.parse(localStorage.getItem("user"));
+const userData = JSON.parse(localStorage.getItem("userData"));
+document
+  .querySelector(".profile-img")
+  .setAttribute(
+    "src",
+    `http://127.0.0.1:8000/uploads/userImages/${userData.image}`
+  );
 
 document.querySelector(".categories-nav").addEventListener("click", () => {
   window.location.href = "home.html?page=categories";
@@ -48,11 +54,23 @@ document.querySelector(".all").addEventListener("click", () => {
 document.querySelector(".for-you").addEventListener("click", () => {
   window.location.href = "../pages/home.html?page=for-you";
 });
-
+console.log(userData.id);
+///get_cart_items/{id?}
+async function fetchItemsCart() {
+  try {
+    const response = await axios.get(
+      `http://127.0.0.1:8000/api/get_cart_items/${userData.id}`
+    );
+    const items_cart = await response.data.products;
+    localStorage.setItem("items_cart", JSON.stringify(items_cart));
+  } catch (error) {
+    console.error(error);
+  }
+}
 async function fetchfavorites() {
   try {
     const response = await axios.get(
-      `http://127.0.0.1:8000/api/get_user_fav/1`
+      `http://127.0.0.1:8000/api/get_user_fav/${userData.id}`
     );
     const products = await response.data.products;
     localStorage.setItem("favorites", JSON.stringify(products));
@@ -61,6 +79,14 @@ async function fetchfavorites() {
   }
 }
 fetchfavorites();
+async function checkAndcreateCart() {
+  try {
+    await axios.get(`http://127.0.0.1:8000/api/create_cart/${userData.id}`);
+  } catch (error) {
+    console.error(error);
+  }
+}
+checkAndcreateCart();
 async function fetchproducts(path) {
   try {
     const response = await axios.get(`http://127.0.0.1:8000/api/${path}`);
@@ -93,7 +119,7 @@ function ProductsHTML(id, image, name, description, price) {
                 <div>${price}$</div>
                 <div class="bottom">
                 <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round" id="fav-${id}"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                <div class="add-cart-${id}"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <div class="add-cart-${id}"><svg width="25px" height="25px" viewBox="0 0 24 24" fill="#fcfcfc" xmlns="http://www.w3.org/2000/svg" id="cart-${id}">
 <g clip-path="url(#clip0_15_35)">
 <rect width="24" height="24" fill="none"/>
 <path d="M5.33331 6H19.8672C20.4687 6 20.9341 6.52718 20.8595 7.12403L20.1095 13.124C20.0469 13.6245 19.6215 14 19.1172 14H16.5555H9.44442H7.99998" stroke="#000000" stroke-linejoin="round"/>
@@ -106,7 +132,7 @@ function ProductsHTML(id, image, name, description, price) {
 <rect width="24" height="24" fill="white"/>
 </clipPath>
 </defs>
-</svg>Add Cart</div>
+</svg></div>
                 </div>
             </div>
         </div>`;
@@ -138,18 +164,42 @@ function displayProducts(products) {
             `http://127.0.0.1:8000/api/remove_fav/${product.id}`
           );
           fav_btn.setAttribute("fill", "none");
-          window.location.reload();
         } catch (error) {
           console.error(error);
         }
       } else {
         const data = new FormData();
-        data.append("user_id", 1);
+        data.append("user_id", userData.id);
         data.append("product_id", product.id);
         try {
           await axios.post("http://127.0.0.1:8000/api/add_to_fav", data);
           fav_btn.setAttribute("fill", "#f70707");
-          window.location.reload();
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      window.location.reload();
+    });
+    let cart_btn = document.getElementById(`cart-${product.id}`);
+    cart_btn.addEventListener("click", async () => {
+      if (fav_btn.getAttribute("fill") == "#fcfcfc") {
+        ///remove_cart_items/{id?}"
+        try {
+          await axios.delete(
+            `http://127.0.0.1:8000/apiremove_cart_items/${prduct.id}`
+          );
+          cart_btn.setAttribute("fill", "none");
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        const data = new FormData();
+        data.append("user_id", userData.id);
+        data.append("product_id", product.id);
+        data.append("price", product.price);
+        try {
+          await axios.post("http://127.0.0.1:8000/api/add_item", data);
+          cart_btn.setAttribute("fill", "#fcfcfc");
         } catch (error) {
           console.error(error);
         }
@@ -158,8 +208,7 @@ function displayProducts(products) {
   });
 }
 if (page_param == "for-you") {
-  id = 6;
-  fetchproducts("user_interest/6");
+  fetchproducts(`user_interest/${userData.id}`);
 } else if (page_param == "categories") {
   fetchCategories("get_all_categories");
   let categories = JSON.parse(localStorage.getItem("categories"));
@@ -177,12 +226,10 @@ if (page_param == "for-you") {
       const product_container = document.querySelector(".products-container");
       product_container.innerHTML = "";
       fetchproducts(`get_product_by_category/${ele.id}`);
-      document.querySelector(`.category-${ele.id}`).style.backgroundColor =
-        "rgba(0, 0, 0, 0.2)";
     });
   });
 } else if (page_param == "favorites") {
-  fetchproducts("get_user_fav/1");
+  fetchproducts(`get_user_fav/${userData.id}`);
 } else {
   fetchproducts("get_all_products");
 }

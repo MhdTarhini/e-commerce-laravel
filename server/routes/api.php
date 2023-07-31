@@ -43,11 +43,12 @@ Route::get("/add_products",[ProductsController::class,"getProducts"]);
 Route::get("/get_user_fav/{id?}",[ProductsController::class,"getUserFavorites"]);
 Route::get("/get_all_categories",[CategoriesContoller::class,"getCategories"]);
 Route::get("/get_cart_items/{id?}",[CartController::class,"getUserCartAndItems"]);
+Route::get("/create_cart/{id?}",[CartController::class,"createUserCart"]);
 Route::delete("/remove_cart_items/{id?}",[CartController::class,"removeItemFromCart"]);
 Route::get("/update-quantity/{direction?}/{id?}",[ItemsController::class,"updateQuantity"]);
 Route::post("/add_to_fav",[FavoritesController::class,"addProduct"]);
 Route::delete("/remove_fav/{product_id?}",[FavoritesController::class,"removeProduct"]);
-
+Route::post("/add_item",[ItemsController::class,"addItem"]);
 Route::get("/add_interste/{user_id?}/{cat_id?}",[InterstesController::class,"addToInterest"]);
 
 

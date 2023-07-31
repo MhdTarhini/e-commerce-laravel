@@ -15,7 +15,7 @@ class CartController extends Controller
     }
 
     function getUserCartAndItems($id){
-        $user_cart=Cart::find($id);
+        $user_cart=Cart::where('user_id',$id)->first();
         $cart_id=$user_cart->id;
         $get_items=Item::where("cart_id",$cart_id)->get();
         $products = [];
@@ -40,5 +40,18 @@ class CartController extends Controller
         $getItems=Item::where("product_id",$id)->first();
         $getItems->delete();
         return response()->json(['status' => 'success']);
+    }
+
+    function createUserCart($id) {
+        $check_carts=Cart::where('user_id',$id)->first();
+        if($check_carts){
+            return response()->json(['status' => 'already exist']);
+        }
+        $cart=new Cart;
+        $cart->user_id=$id;
+        $cart->save();
+        return response()->json(['status' => 'success']);
+
+        
     }
 }

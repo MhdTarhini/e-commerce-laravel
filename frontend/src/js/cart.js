@@ -1,9 +1,46 @@
+const auth = JSON.parse(localStorage.getItem("auth"));
+axios.defaults.headers.common["Authorization"] = `Bearer ${auth.token}`;
+const userData = JSON.parse(localStorage.getItem("userData"));
+document
+  .querySelector(".profile-img")
+  .setAttribute(
+    "src",
+    `http://127.0.0.1:8000/uploads/userImages/${userData.image}`
+  );
+
 document.querySelector(".categories-nav").addEventListener("click", () => {
   window.location.href = "home.html?page=categories";
+});
+document.querySelector(".fav-nav").addEventListener("click", () => {
+  window.location.href = "home.html?page=favorites";
 });
 document.querySelector(".home-nav").addEventListener("click", () => {
   window.location.href = "home.html";
 });
+const user_info = document.querySelector(" .profile-img");
+const user_info_list = document.querySelector(".user-info-list");
+user_info.addEventListener("click", () => {
+  user_info_list.classList.toggle("show");
+});
+
+document.addEventListener("click", function (event) {
+  if (!user_info_list.contains(event.target) && event.target !== user_info) {
+    user_info_list.classList.remove("show");
+  }
+});
+document.querySelector(".sign-out").addEventListener("click", async () => {
+  try {
+    const response = await axios.post(`http://127.0.0.1:8000/api/logout`);
+    const data = await response.data;
+    if ((data.status = "success")) {
+      localStorage.clear();
+      window.location.href = "../../index.html";
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 function itemsFrom(id, image, name, description, price, category, quantity) {
   return `
             <td>${id}</td>
@@ -33,7 +70,6 @@ function displayProducts(products) {
   });
   products.forEach((product) => {
     const tr = document.createElement("tr");
-    tr.classList.add("helloh");
     tr.innerHTML = itemsFrom(
       product.id,
       product.image,
@@ -68,7 +104,7 @@ function displayProducts(products) {
 async function getUserItems() {
   try {
     const response = await axios.get(
-      "http://127.0.0.1:8000/api/get_cart_items/1"
+      `http://127.0.0.1:8000/api/get_cart_items/${userData.id}`
     );
     const cart_products = response.data.products;
     displayProducts(cart_products);

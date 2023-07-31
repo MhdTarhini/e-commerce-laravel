@@ -86,10 +86,10 @@ async function singUp(event) {
       localStorage.setItem("userData", JSON.stringify(response.data.user));
       console.log(response);
       if (response.data.status === "success") {
-        checkedCheckboxes.forEach((ele) => {
+        for (const ele of checkedCheckboxes) {
           if (ele.checked) {
             try {
-              axios.get(
+              await axios.get(
                 `http://127.0.0.1:8000/api/add_interste/${response.data.user.id}/${ele.id}`,
                 {
                   headers: {
@@ -98,12 +98,12 @@ async function singUp(event) {
                 }
               );
             } catch (error) {
-              console.erroe(error);
+              console.error(error);
             }
           }
-        });
+        }
+        window.location.href = "../../index.html";
       }
-      window.location.href = "../../index.html";
     } catch (error) {
       email_err.classList.remove("none");
       console.error(error);
@@ -123,3 +123,5 @@ labels.forEach((ele) => {
     input.setAttribute("placeholder", `${ele.innerHTML}`);
   });
 });
+
+async function makeRequests() {}
