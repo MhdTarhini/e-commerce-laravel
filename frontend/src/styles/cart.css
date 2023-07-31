@@ -1,0 +1,86 @@
+* {
+    box-sizing: border-box;
+}
+
+body,
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px 0px 10px;
+    border-bottom: 1px outset rgb(25, 66, 25);
+    background-image: url("../../assets/wp7630075.jpg");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    border-radius: 0px 0px 10px 10px;
+}
+
+
+.logo {
+    font-size: 40px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(73, 255, 70);
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.558);
+    word-spacing: 10px;
+    padding: 10px 15px;
+    margin: 0px 0px 10px 10px;
+}
+
+.profile-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.navigation-side {
+    display: flex;
+    /* gap: 70px; */
+    align-items: center;
+    justify-content: center;
+
+}
+
+.navigation-side div {
+    display: flex;
+    /* gap: 70px; */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20px;
+    flex: 1;
+    padding: 0px 40px;
+    height: 100%;
+}
+
+.navigation-side div:hover {
+    background-color: rgba(0, 0, 0, 0.047);
+    /* font-size: 20px;
+    height: 100%; */
+}
+
+.products-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+thead tr th {
+    padding: 20px 40px;
+}
+
+tbody tr td {
+    padding: 20px 40px;
+}
+
+.product-image {
+    width: 50px;
+    height: 50px;
+    /* border-radius: 50%; */
+}
