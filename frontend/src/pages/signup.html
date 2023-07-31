@@ -11,66 +11,68 @@
 <body>
     <h1 class="logo">LS</h1>
         <div class="sign-up-container">
-            <h2>Welcome to <span class="welcome">LARA SALE</span></h2>
+            <div class="input-line">
+                <div class="input">
+                    <label for="last_name" class="circle"></label>
+                    <input type="file" name="profile-image" id="profile-image">
+                </div>
+                <h2>Welcome to <span class="welcome">LARA SALE</span></h2>
+                </div>
             <div class="input-line">
                 <div class="input">
                     <label for="first_name" class="label">First name</label>
-                    <input type="text" name="first-name" class="info" id="first_name" placeholder="First name" required>
+                    <input type="text" name="first-name" class="info" id="first_name" placeholder="First name">
                 </div>
                 <div class="input">
                     <label for="last_name" class="label">Last name</label>
-                    <input type="text" name="last-name" class="info" id="last_name" placeholder="Last name" required>
+                    <input type="text" name="last-name" class="info" id="last_name" placeholder="Last name">
                 </div>
             </div>
             <div class="input-line">
                 <div class="input">
                     <label for="address" class="label">Address</label>
-                    <input type="text" name="address" class="info" id="address" placeholder="Address" required>
+                    <input type="text" name="address" class="info" id="address" placeholder="Address">
                 </div>
                 <div class="input">
                     <label for="email" class="label">Email</label>
-                    <input type="email" name="email" class="info" id="email" required placeholder="Email" required>
+                    <input type="email" name="email" class="info" id="email" required placeholder="Email">
                 </div>
             </div>
             <div class="input-line">
                 <div class="input">
                     <label for="password" class="label">Password</label>
-                    <input type="password" name="password" class="info" id="password" placeholder="Password" required>
+                    <input type="password" name="password" class="info" id="password" placeholder="Password">
                     <span class="pass-error none">minimum 6 digits required</span>
                 </div>
                 <div class="input">
                     <label for="repeat-password" class="label">Repeat Password</label>
-                    <input type="password" name="repeat-password" class="info" id="repeat-password" placeholder="Repeat password" required>
+                    <input type="password" name="repeat-password" class="info" id="repeat-password" placeholder="Repeat password">
                 </div>
             </div>
             <div class="check">
                 <label for="interst" class="check-question">What catergory are you intersted in?</label>
                 <div class="input-line checkboxes">
                     <div class="one-check">
-                        <label for="man">Man</label>
-                        <input type="checkbox" name="interest" id="man" value="man">
+                        <label for="man">Man clothes</label>
+                        <input type="checkbox" name="interest" id="1" value="Man clothes">
                     </div>
                     <div class="one-check">
-                        <label for="woman">Woman</label>
-                        <input type="checkbox" name="interest" id=" interst woman" value="woman">
-                    </div>
-                    <div class="one-check">
-                        <label for="woman">tech</label>
-                        <input type="checkbox" name="interest" id=" interst woman" value="tech">
-                    </div>
-                    <div class="one-check">
-                        <label for="woman">kids</label>
-                        <input type="checkbox" name="interest" id=" interst woman" value="kids">
+                        <label for="woman">Woman clothes</label>
+                        <input type="checkbox" name="interest" id="2" value="Woman clothes">
                     </div>
                     <div class="one-check">
                         <label for="woman">jewlery</label>
-                        <input type="checkbox" name="interest" id=" interst woman" value="jewlery">
+                        <input type="checkbox" name="interest" id="3" value="jewlery">
+                    </div>
+                    <div class="one-check">
+                        <label for="woman">electronics</label>
+                        <input type="checkbox" name="interest" id="4" value="electronics">
                     </div>
                 </div>
                 </div>
                     <div class="input-line bottom-container">
                     <div type="button" class="button">Signup</div>
-                <h3>already have an email ? <a href="#">Sign in</a></h3>
+                <h3>Already have an email ? <a href="../../index.html">Sign in</a></h3>
             </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

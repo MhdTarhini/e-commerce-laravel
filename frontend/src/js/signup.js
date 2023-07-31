@@ -51,34 +51,38 @@ async function singUp(event) {
     'input[type="checkbox"][name="interest"]'
   );
   const check_question = document.querySelector(".check-question");
-  const customer_intersted_cat = [];
   let one_checked = false;
-  checkboxes.forEach((ele) => {
+  checkboxes.forEach(async (ele) => {
     if (ele.checked) {
-      customer_intersted_cat.push(ele.value);
-      one_checked = true;
+      return (one_checked = true);
     }
   });
   if (!one_checked) {
     valid_data -= 1;
+  } else {
+    console.log(arry);
   }
   if (!one_checked) {
     check_question.style.color = "red";
   } else {
     check_question.style.color = "black";
   }
-  // sign_up_data.append("intersted", customer_intersted_cat);
   if (valid_data == 3) {
-    // try {
-    //   const response = await fetch("localhost:8000/api/register", {
-    //     method: "POST",
-    //     body: sign_up_data,
-    //   });
-    //   window.location.href = "index.html";
-    //   // localStorage.setItem("userData", JSON.stringify(response.json().user));
-    // } catch (error) {
-    //   console.error(error);
-    // }
+    const checkedCheckboxes = document.querySelectorAll(
+      'input[type="checkbox"][name="interest"]:checked'
+    );
+    checkedCheckboxes.forEach(async (ele) => {
+      if (ele.checked) {
+        one_checked = true;
+        try {
+          const response = await axios.get(
+            `http://127.0.0.1:8000/api/add_interste/1/${ele.id}`
+          );
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    });
     try {
       const response = await axios.post(
         "http://localhost:8000/api/register",
@@ -87,7 +91,7 @@ async function singUp(event) {
       localStorage.setItem("userData", JSON.stringify(response.data.user));
 
       if (response.data.status === "success") {
-        window.location.href = "../../index.com";
+        // window.location.href = "../../index.com";
       } else {
         console.error(response.data.message);
       }

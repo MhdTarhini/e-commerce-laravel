@@ -52,8 +52,19 @@ class AuthController extends Controller
         'email' => 'required|string|email|max:255|unique:users',
         'password' => 'required|string|min:6',
         'address' => 'required|string|max:255',
-        'image' => 'nullable|string', 
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048' 
     ]);
+
+    $imageName = null;
+    if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('uploads'), $imageName);
+            
+            // You can also store the image path in the database if required.
+            
+            // return back()->with('success', 'Image uploaded successfully.');
+        }
 
     $user = User::create([
         'first_name' => $request->input('first_name'),
@@ -61,7 +72,7 @@ class AuthController extends Controller
         'email' => $request->input('email'),
         'password' => Hash::make($request->input('password')),
         'address' => $request->input('address'),
-        'image' => '', 
+        'image' => $imageName?$imageName:'', 
         'number_of_visit' => 0,
         'role_id' => 2,
     ]);

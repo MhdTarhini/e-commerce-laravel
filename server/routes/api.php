@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoriesContoller;
 use App\Http\Controllers\FavoritesController;
+use App\Http\Controllers\InterstesController;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UsersController;
@@ -46,6 +47,8 @@ Route::delete("/remove_cart_items/{id?}",[CartController::class,"removeItemFromC
 Route::get("/update-quantity/{direction?}/{id?}",[ItemsController::class,"updateQuantity"]);
 Route::post("/add_to_fav",[FavoritesController::class,"addProduct"]);
 Route::delete("/remove_fav/{product_id?}",[FavoritesController::class,"removeProduct"]);
+
+Route::get("/add_interste/{user_id?}/{cat_id?}",[InterstesController::class,"addToInterest"]);
 
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

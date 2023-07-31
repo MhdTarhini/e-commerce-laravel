@@ -146,9 +146,15 @@ button {
         display: flex;
        justify-content: space-between;
     }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                .bottom-container {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    flex-direction: column;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    width: 100%;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    justify-content: space-between;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
+    .bottom-container {
+        flex-direction: column;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+.circle{
+
+}
+#profile-image{
+    visibility: none;
 }

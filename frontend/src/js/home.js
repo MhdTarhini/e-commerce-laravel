@@ -4,8 +4,34 @@ document.querySelector(".categories-nav").addEventListener("click", () => {
 document.querySelector(".fav-nav").addEventListener("click", () => {
   window.location.href = "home.html?page=favorites";
 });
+document.querySelector(".cart-nav").addEventListener("click", () => {
+  window.location.href = "cart.html";
+});
 document.querySelector(".home-nav").addEventListener("click", () => {
   window.location.href = "home.html";
+});
+const user_info = document.querySelector(" .profile-img");
+const user_info_list = document.querySelector(".user-info-list");
+user_info.addEventListener("click", () => {
+  user_info_list.classList.toggle("show");
+});
+
+document.addEventListener("click", function (event) {
+  if (!user_info_list.contains(event.target) && event.target !== user_info) {
+    user_info_list.classList.remove("show");
+  }
+});
+document.querySelector(".sign-out").addEventListener("click", async () => {
+  try {
+    const response = await axios.post(`http://127.0.0.1:8000/api/logout`);
+    const data = await response.data;
+    if ((data.status = "success")) {
+      window.location.href = "../../index.html";
+    }
+    localStorage.setItem("favorites", JSON.stringify(products));
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 const urlSearchParams = new URLSearchParams(window.location.search);
