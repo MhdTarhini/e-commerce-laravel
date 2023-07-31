@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favorite;
 use App\Models\Interest;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -55,6 +56,24 @@ Function getProductByCategory($id){
     $products=Product::where("category_id", $id)->get();
     return response()->json(['status' => 'success','products'=>$products]);
 
+}
+function getUserFavorites($id) {
+    $get_user_fav=Favorite::where("user_id",$id)->get();
+
+    $products = [];
+    foreach ($get_user_fav as $user_fav) {
+        
+        $get_fav_products_id= $user_fav->product_id;
+
+        $getproduct=Product::where("id", $get_fav_products_id)->get();
+
+        foreach ($getproduct as $product) {
+          $products[] = $product;
+        }
+    };
+
+    return response()->json(['status' => 'success','user'=>$get_user_fav,"products"=>$products]);
+    
 }
 }
 

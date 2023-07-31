@@ -38,6 +38,7 @@ Route::get("/user_interest/{id?}",[ProductsController::class,"InterstedProduts"]
 Route::delete("/delete_product/{id?}",[ProductsController::class,"deleteProduct"]);
 Route::get("/get_all_products",[ProductsController::class,"getProducts"]);
 Route::get("/add_products",[ProductsController::class,"getProducts"]);
+Route::get("/get_user_fav/{id?}",[ProductsController::class,"getUserFavorites"]);
 Route::get("/get_all_categories",[CategoriesContoller::class,"getCategories"]);
 Route::get("/get_cart_items/{id?}",[CartController::class,"getUserCartAndItems"]);
 Route::delete("/remove_cart_items/{id?}",[CartController::class,"removeItemFromCart"]);

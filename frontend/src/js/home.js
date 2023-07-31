@@ -111,6 +111,7 @@ if (page_param == "for-you") {
     });
   });
 } else if (page_param == "favorites") {
+  fetchproducts("get_user_fav/1");
 } else {
   fetchproducts("get_all_products");
 }
