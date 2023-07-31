@@ -31,6 +31,7 @@ Route::controller(AuthController::class)->group(function () {
 Route::get("/get_all_users",[UsersController::class,"getUsers"]);
 Route::get("/make_admin/{id?}",[UsersController::class,"makeAdmin"]);
 Route::post("/edit_product/{id?}",[ProductsController::class,"editProduct"]);
+Route::get("/get_product_by_category/{id?}",[ProductsController::class,"getProductByCategory"]);
 Route::get("/user_interest/{id?}",[ProductsController::class,"InterstedProduts"]);
 Route::delete("/delete_product/{id?}",[ProductsController::class,"deleteProduct"]);
 Route::get("/get_all_products",[ProductsController::class,"getProducts"]);

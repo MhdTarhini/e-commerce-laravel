@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Interest;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use SebastianBergmann\CodeUnit\FunctionUnit;
 
 class ProductsController extends Controller
 {
@@ -41,18 +42,19 @@ class ProductsController extends Controller
     $products = [];
     foreach ($getuser as $getuser) {
 
-
         $getCat_id=$getuser->category_id;
-
 
         $getproducts=Product::where("category_id", $getCat_id)->get();
         foreach ($getproducts as $product) {
-        //  $productsByCategory[$getCat_id] = $getproducts;
         $products[] = $product;
         }
     };
+    return response()->json(['status' => 'success','products'=>$products]);
+}
+Function getProductByCategory($id){
+    $products=Product::where("category_id", $id)->get();
+    return response()->json(['status' => 'success','products'=>$products]);
 
-        return response()->json(['status' => 'success','products'=>$products]);
-    }
+}
 }
 
