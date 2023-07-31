@@ -1,12 +1,14 @@
 const sign_up_btn = document.querySelector(".button");
 sign_up_btn.addEventListener("click", singUp);
 
+
 const first_name = document.getElementById("first_name");
 const last_name = document.getElementById("last_name");
 const address = document.getElementById("address");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const repeat_Password = document.getElementById("repeat-password");
+const profile_image = document.getElementById("profile-image");
 
 async function singUp(event) {
   event.preventDefault();
@@ -16,7 +18,9 @@ async function singUp(event) {
   sign_up_data.append("address", address.value);
   sign_up_data.append("email", email.value);
   sign_up_data.append("password", password.value);
-  // sign_up_data.append("image", "");
+  if (profile_image.files[0]) {
+    sign_up_data.append("profile-image", profile_image.files[0]);
+  }
 
   let valid_data = 0;
   if (password.value.length < 6) {
@@ -37,6 +41,9 @@ async function singUp(event) {
 
   let check_couter = 0;
   for (const [key, value] of sign_up_data.entries()) {
+    if (key == "profile-image") {
+      continue;
+    }
     if (value == "") {
       document.getElementById(`${key}`).style.borderColor = "red";
     } else {
@@ -60,7 +67,6 @@ async function singUp(event) {
   if (!one_checked) {
     valid_data -= 1;
   } else {
-    console.log(arry);
   }
   if (!one_checked) {
     check_question.style.color = "red";
@@ -71,31 +77,35 @@ async function singUp(event) {
     const checkedCheckboxes = document.querySelectorAll(
       'input[type="checkbox"][name="interest"]:checked'
     );
-    checkedCheckboxes.forEach(async (ele) => {
-      if (ele.checked) {
-        one_checked = true;
-        try {
-          const response = await axios.get(
-            `http://127.0.0.1:8000/api/add_interste/1/${ele.id}`
-          );
-        } catch (error) {
-          console.error(error);
-        }
-      }
-    });
+    const email_err = document.querySelector(".email-err");
     try {
       const response = await axios.post(
         "http://localhost:8000/api/register",
         sign_up_data
       );
       localStorage.setItem("userData", JSON.stringify(response.data.user));
-
+      console.log(response);
       if (response.data.status === "success") {
-        // window.location.href = "../../index.com";
-      } else {
-        console.error(response.data.message);
+        checkedCheckboxes.forEach((ele) => {
+          if (ele.checked) {
+            try {
+              axios.get(
+                `http://127.0.0.1:8000/api/add_interste/${response.data.user.id}/${ele.id}`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${response.data.authorisation.token}`,
+                  },
+                }
+              );
+            } catch (error) {
+              console.erroe(error);
+            }
+          }
+        });
       }
+      window.location.href = "../../index.html";
     } catch (error) {
+      email_err.classList.remove("none");
       console.error(error);
     }
   }

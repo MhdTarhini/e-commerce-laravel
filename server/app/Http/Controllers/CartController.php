@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     function getUserCartAndItems($id){
         $user_cart=Cart::find($id);
         $cart_id=$user_cart->id;

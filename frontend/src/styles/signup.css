@@ -23,14 +23,17 @@ body {
     padding: 30px;
 }
 
-
+h2 {
+    align-self: center;
+    margin-left: 100px;
+}
 .welcome {
     color: rgb(73, 255, 70);
 }
 
 .sign-up-container {
     position: absolute;
-    top: 15%;
+    top: 5%;
     left: 30%;
     background-color: white;
     border-radius: 20px;
@@ -48,6 +51,7 @@ body {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .input {
@@ -153,8 +157,33 @@ button {
     }
 }
 .circle{
-
+    background-color: rgb(73, 255, 70);
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: aliceblue;
+        cursor: pointer;
+        padding: 0;
+        margin-right: 30px;
+    }
+    
+    #profile-image {
+        display: none;
+        opacity: 0;
+    }
+    
+.circle:hover {
+    background-color: rgb(4, 255, 0);
 }
-#profile-image{
-    visibility: none;
+.email-err {
+    color: red;
+    font-size: 12px;
+    margin: 0px;
+    padding: 0px;
+}
+.email-err.none{
+    display: none;
 }

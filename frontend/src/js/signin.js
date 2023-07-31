@@ -27,18 +27,18 @@ async function signIn() {
   const email = document.getElementById("email");
   const password = document.getElementById("password");
   const sign_up_data = new FormData();
-  sign_up_data.append("address", address.value);
   sign_up_data.append("email", email.value);
+  sign_up_data.append("password", password.value);
   try {
     const response = await axios.post(
       "http://localhost:8000/api/login",
       sign_up_data
     );
-
+    console.log(response);
     if (response.data.status === "success") {
-      localStorage.setItem("userData", JSON.stringify(response));
-
-      window.location.href = "index.html";
+      localStorage.setItem("userData", JSON.stringify(response.data.user));
+      localStorage.setItem("auth", JSON.stringify(response.data.authorisation));
+      window.location.href = "src/pages/home.html";
     } else {
       console.error(response.data.message);
     }

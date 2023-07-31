@@ -1,3 +1,7 @@
+const auth = JSON.parse(localStorage.getItem("auth"));
+axios.defaults.headers.common["Authorization"] = `Bearer ${auth.token}`;
+const userData = JSON.parse(localStorage.getItem("user"));
+
 document.querySelector(".categories-nav").addEventListener("click", () => {
   window.location.href = "home.html?page=categories";
 });
@@ -26,9 +30,9 @@ document.querySelector(".sign-out").addEventListener("click", async () => {
     const response = await axios.post(`http://127.0.0.1:8000/api/logout`);
     const data = await response.data;
     if ((data.status = "success")) {
+      localStorage.clear();
       window.location.href = "../../index.html";
     }
-    localStorage.setItem("favorites", JSON.stringify(products));
   } catch (error) {
     console.error(error);
   }
@@ -182,5 +186,3 @@ if (page_param == "for-you") {
 } else {
   fetchproducts("get_all_products");
 }
-
-

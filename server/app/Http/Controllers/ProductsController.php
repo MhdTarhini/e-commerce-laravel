@@ -10,6 +10,11 @@ use SebastianBergmann\CodeUnit\FunctionUnit;
 
 class ProductsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     function getProducts(){
         $all_product=Product::get();
         return response()->json(['products'=>$all_product]);

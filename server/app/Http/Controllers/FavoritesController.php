@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class FavoritesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     function addProduct(Request $request){
         $fav=new Favorite;
         $fav->user_id = $request->user_id;

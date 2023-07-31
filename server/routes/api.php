@@ -51,6 +51,6 @@ Route::delete("/remove_fav/{product_id?}",[FavoritesController::class,"removePro
 Route::get("/add_interste/{user_id?}/{cat_id?}",[InterstesController::class,"addToInterest"]);
 
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});

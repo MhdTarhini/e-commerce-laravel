@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class ItemsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     function updateQuantity($direction,$id) {
         $get_item=Item::where('product_id',$id)->first();
         // $quantity=$get_item->quantity;
