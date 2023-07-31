@@ -12,15 +12,17 @@ class CartController extends Controller
     function getUserCartAndItems($id){
         $user_cart=Cart::find($id);
         $cart_id=$user_cart->id;
-        $get_items=Item::find($cart_id)->get();
+        $get_items=Item::where("cart_id",$cart_id)->get();
         $products = [];
         foreach ($get_items as $get_items) {
-
+            
             $get_Product_id=$get_items->product_id;
+            $quantity=$get_items->quantity;
 
-            $getproducts=Product::where("id", $get_Product_id)->get();
-
-            foreach ($getproducts as $product) {
+            $get_product=Product::where("id", $get_Product_id)->get();
+            
+            foreach ($get_product as $product) {
+                $product->quantity = $quantity;
                 $products[] = $product;
             }
         }
@@ -32,6 +34,6 @@ class CartController extends Controller
     function removeItemFromCart($id){
         $getItems=Item::where("product_id",$id)->first();
         $getItems->delete();
-        return response()->json(['status' => 'success'])
+        return response()->json(['status' => 'success']);
     }
 }

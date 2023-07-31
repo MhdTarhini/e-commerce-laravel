@@ -84,3 +84,7 @@ tbody tr td {
     height: 50px;
     /* border-radius: 50%; */
 }
+svg {
+    margin: 3px;
+    cursor: pointer;
+}
