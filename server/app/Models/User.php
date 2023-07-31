@@ -28,6 +28,11 @@ class User extends Authenticatable implements JWTSubject
         'role_id',
     ];
 
+   public function favorite()
+    {
+    return $this->belongsTo(Favorite::class, 'user_id', 'id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

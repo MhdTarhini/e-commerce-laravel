@@ -7,6 +7,7 @@ use Lcobucci\JWT\Signer\Ecdsa\SignatureConverter;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoriesContoller;
+use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UsersController;
@@ -43,6 +44,8 @@ Route::get("/get_all_categories",[CategoriesContoller::class,"getCategories"]);
 Route::get("/get_cart_items/{id?}",[CartController::class,"getUserCartAndItems"]);
 Route::delete("/remove_cart_items/{id?}",[CartController::class,"removeItemFromCart"]);
 Route::get("/update-quantity/{direction?}/{id?}",[ItemsController::class,"updateQuantity"]);
+Route::post("/add_to_fav",[FavoritesController::class,"addProduct"]);
+Route::delete("/remove_fav/{product_id?}",[FavoritesController::class,"removeProduct"]);
 
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

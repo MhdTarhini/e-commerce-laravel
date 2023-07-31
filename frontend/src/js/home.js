@@ -19,13 +19,24 @@ document.querySelector(".for-you").addEventListener("click", () => {
   window.location.href = "../pages/home.html?page=for-you";
 });
 
+async function fetchfavorites() {
+  try {
+    const response = await axios.get(
+      `http://127.0.0.1:8000/api/get_user_fav/1`
+    );
+    const products = await response.data.products;
+    localStorage.setItem("favorites", JSON.stringify(products));
+  } catch (error) {
+    console.error(error);
+  }
+}
+fetchfavorites();
 async function fetchproducts(path) {
   try {
     const response = await axios.get(`http://127.0.0.1:8000/api/${path}`);
     const products = await response.data.products;
-    localStorage.setItem("products", JSON.stringify(products));
     displayProducts(products);
-    console.log(products);
+    localStorage.setItem("products", JSON.stringify(products));
   } catch (error) {
     console.error(error);
   }
@@ -40,6 +51,7 @@ async function fetchCategories(path) {
     console.error(error);
   }
 }
+
 function ProductsHTML(id, image, name, description, price) {
   return `<div class="product-card">
             <div class="top-side">
@@ -50,9 +62,7 @@ function ProductsHTML(id, image, name, description, price) {
                 <div>${description}</div>
                 <div>${price}$</div>
                 <div class="bottom">
-                <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M11.993 5.09691C11.0387 4.25883 9.78328 3.75 8.40796 3.75C5.42122 3.75 3 6.1497 3 9.10988C3 10.473 3.50639 11.7242 4.35199 12.67L12 20.25L19.4216 12.8944L19.641 12.6631C20.4866 11.7172 21 10.473 21 9.10988C21 6.1497 18.5788 3.75 15.592 3.75C14.2167 3.75 12.9613 4.25883 12.007 5.09692L12 5.08998L11.993 5.09691ZM12 7.09938L12.0549 7.14755L12.9079 6.30208L12.9968 6.22399C13.6868 5.61806 14.5932 5.25 15.592 5.25C17.763 5.25 19.5 6.99073 19.5 9.10988C19.5 10.0813 19.1385 10.9674 18.5363 11.6481L18.3492 11.8453L12 18.1381L5.44274 11.6391C4.85393 10.9658 4.5 10.0809 4.5 9.10988C4.5 6.99073 6.23699 5.25 8.40796 5.25C9.40675 5.25 10.3132 5.61806 11.0032 6.22398L11.0921 6.30203L11.9452 7.14752L12 7.09938Z" fill="#080341"/>
-</svg>
+                <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round" id="fav-${id}"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                 <div class="add-cart-${id}"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_15_35)">
 <rect width="24" height="24" fill="none"/>
@@ -84,6 +94,37 @@ function displayProducts(products) {
       product.price
     );
     product_container.appendChild(div);
+    const favorites = JSON.parse(localStorage.getItem("favorites"));
+    const fav_btn = document.getElementById(`fav-${product.id}`);
+    favorites.forEach((fav) => {
+      if (fav.id == product.id) {
+        fav_btn.setAttribute("fill", "#f70707");
+      }
+    });
+    fav_btn.addEventListener("click", async () => {
+      if (fav_btn.getAttribute("fill") == "#f70707") {
+        try {
+          await axios.delete(
+            `http://127.0.0.1:8000/api/remove_fav/${product.id}`
+          );
+          fav_btn.setAttribute("fill", "none");
+          window.location.reload();
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        const data = new FormData();
+        data.append("user_id", 1);
+        data.append("product_id", product.id);
+        try {
+          await axios.post("http://127.0.0.1:8000/api/add_to_fav", data);
+          fav_btn.setAttribute("fill", "#f70707");
+          window.location.reload();
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    });
   });
 }
 if (page_param == "for-you") {

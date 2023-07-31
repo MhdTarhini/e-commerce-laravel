@@ -35,10 +35,9 @@ async function signIn() {
       sign_up_data
     );
 
-    // localStorage.setItem("userData", JSON.stringify(response));
-
     if (response.data.status === "success") {
-      console.log(response.data.user);
+      localStorage.setItem("userData", JSON.stringify(response));
+
       window.location.href = "index.html";
     } else {
       console.error(response.data.message);
