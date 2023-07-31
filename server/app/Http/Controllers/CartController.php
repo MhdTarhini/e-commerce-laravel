@@ -28,4 +28,10 @@ class CartController extends Controller
         return response()->json(['status' => 'success','user_cart'=>$user_cart,"cart_id"=>$cart_id,"user_items"=>$get_items,"products"=>$products]);
 
     }
+
+    function removeItemFromCart($id){
+        $getItems=Item::where("product_id",$id)->first();
+        $getItems->delete();
+        return response()->json(['status' => 'success'])
+    }
 }
