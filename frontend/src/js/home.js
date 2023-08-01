@@ -112,7 +112,7 @@ async function fetchCategories(path) {
 function ProductsHTML(id, image, name, description, price) {
   return `<div class="product-card">
             <div class="top-side">
-                <img src=${image} alt="" srcset="">
+                <img src=http://127.0.0.1:8000/uploads/ProductsImages/${image} alt="" srcset="">
             </div>
             <div class="product-details none">
                 <div>${name}</div>
@@ -154,11 +154,13 @@ function displayProducts(products) {
     const favorites = JSON.parse(localStorage.getItem("favorites"));
     const items_cart = JSON.parse(localStorage.getItem("items_cart"));
     let cart_btn = document.getElementById(`cart-${product.id}`);
-    items_cart.forEach((item) => {
-      if (item.id == product.id) {
-        cart_btn.setAttribute("fill", "#fcfcfc");
-      }
-    });
+    if (items_cart) {
+      items_cart.forEach((item) => {
+        if (item.id == product.id) {
+          cart_btn.setAttribute("fill", "#fcfcfc");
+        }
+      });
+    }
     const fav_btn = document.getElementById(`fav-${product.id}`);
     favorites.forEach((fav) => {
       if (fav.id == product.id) {

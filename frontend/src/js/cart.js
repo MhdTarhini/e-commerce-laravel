@@ -44,7 +44,7 @@ document.querySelector(".sign-out").addEventListener("click", async () => {
 function itemsFrom(id, image, name, description, price, category, quantity) {
   return `
             <td>${id}</td>
-            <td><img src=${image} class=product-image alt="Product 1"></td>
+            <td><img src=http://127.0.0.1:8000/uploads/productsImages/${image} class=product-image alt="Product 1"></td>
             <td>${name}</td>
             <td>${description}</td>
             <td>${price * quantity}$</td>
@@ -57,7 +57,7 @@ function itemsFrom(id, image, name, description, price, category, quantity) {
 <path d="M11.125 16.313l7.688-7.688 3.594 3.719-11.094 11.063-11.313-11.313 3.5-3.531z"></path>
 </svg></td>
             <td>
-                <button class="delete-${id}">Delete</button>
+                <button class="delete-${id} delete">Delete</button>
             </td>`;
 }
 

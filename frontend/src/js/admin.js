@@ -58,7 +58,7 @@ fetchCategories();
 function productsFrom(id, image, name, description, price, category) {
   return `<tr>
             <td>${id}</td>
-            <td><img src=${image} class=product-image alt="Product 1"></td>
+            <td><img src=http://127.0.0.1:8000/uploads/productsImages/${image} class=product-image alt="Product 1"></td>
             <td>${name}</td>
             <td>${description}</td>
             <td>${price}$</td>

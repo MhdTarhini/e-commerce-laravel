@@ -21,21 +21,23 @@ class ProductsController extends Controller
     }
     function editProduct(Request $request, $id="add"){
         if($id == "add"){
-            $product = new Product;
+        $product = new Product;
+
         }else{
         $product=Product::find($id);
+
         }
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
         $product->category_id = $request->category_id;
-         $imageName = null;
-    if ($request->hasFile('profile-image')) {
-            $image = $request->file('profile-image');
+        $product->image = $request->image;
+    if ($request->hasFile('image')) {
+            $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
             $image->move(public_path('uploads/productsImages'), $imageName);
+            $product->image = $imageName;
         }
-        $product->image = $imageName;
         $product->save();
         return response()->json(['status' => 'success','product'=>$product]);
 

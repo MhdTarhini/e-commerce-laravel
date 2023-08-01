@@ -57,15 +57,28 @@ labels.forEach((ele) => {
 const product_name = document.getElementById("name");
 const product_price = document.getElementById("price");
 const product_description = document.getElementById("decription");
+const product_image = document.getElementById("image");
 const submit_btn = document.querySelector("button");
 
 const urlParams = new URLSearchParams(window.location.search);
 const product_id_param = urlParams.get("id") ? urlParams.get("id") : "";
 const products_data = JSON.parse(localStorage.getItem("products"));
-const categories_data = JSON.parse(localStorage.getItem("categories"));
 
+async function fetchCategories() {
+  try {
+    const response = await axios.get(
+      `http://127.0.0.1:8000/api/get_all_categories`
+    );
+    const categories = await response.data.categories;
+    localStorage.setItem("categories", JSON.stringify(categories));
+    return categories;
+  } catch (error) {
+    console.error(error);
+  }
+}
+fetchCategories();
+const categories_data = JSON.parse(localStorage.getItem("categories"));
 if (product_id_param != "") {
-  console.log("hi");
   submit_btn.innerHTML = "update product";
 
   const matching_product = products_data.find(
@@ -84,7 +97,6 @@ if (product_id_param != "") {
 }
 
 submit_btn.addEventListener("click", async () => {
-  console.log(product_id_param);
   const checkboxes = document.querySelectorAll("[type='checkbox']");
   let product_category = "";
   let one_checked = 0;
@@ -96,22 +108,17 @@ submit_btn.addEventListener("click", async () => {
     }
   });
   if (one_checked == 1) {
-    let category_id = 0;
-    categories_data.forEach((category) => {
-      if (category.category == product_category) {
-        category_id = category.id;
-        return category_id;
-      }
-    });
     let update_data = new FormData();
     update_data.append("name", product_name.value);
     update_data.append("price", product_price.value);
     update_data.append("description", product_description.value);
-    update_data.append("category_id", category_id);
-    update_data.append(
-      "image",
-      "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg"
+    const checked_boxes = document.querySelector(
+      "input[type='checkbox']:checked"
     );
+    const image = product_image.files[0] ? product_image.files[0] : "";
+    update_data.append("category_id", checked_boxes.id);
+    update_data.append("image", image);
+
     if (product_id_param != "") {
       try {
         const reposnse = await axios.post(

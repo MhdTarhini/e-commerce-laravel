@@ -110,4 +110,11 @@ svg {
 .user-info-list div {
     cursor: pointer;
 }
+.delete {
+    background-color: rgb(255, 70, 70);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
 
