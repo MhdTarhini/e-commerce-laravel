@@ -220,10 +220,3 @@ html {
     cursor: pointer;
 }
 
-.user-basic-info {
-    display: flex;
-    gap: 20px;
-    padding: 10px;
-    font-size: 20px;
-    align-items: center;
-}

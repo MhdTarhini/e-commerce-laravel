@@ -1,3 +1,45 @@
+const auth = JSON.parse(localStorage.getItem("auth"));
+axios.defaults.headers.common["Authorization"] = `Bearer ${auth.token}`;
+const userData = JSON.parse(localStorage.getItem("userData"));
+document
+  .querySelector(".profile-img")
+  .setAttribute(
+    "src",
+    `http://127.0.0.1:8000/uploads/userImages/${userData.image}`
+  );
+
+const user_info = document.querySelector(" .profile-img");
+const user_info_list = document.querySelector(".user-info-list");
+user_info.addEventListener("click", () => {
+  user_info_list.classList.toggle("show");
+});
+
+document.addEventListener("click", function (event) {
+  if (!user_info_list.contains(event.target) && event.target !== user_info) {
+    user_info_list.classList.remove("show");
+  }
+});
+document.querySelector(".sign-out").addEventListener("click", async () => {
+  try {
+    const response = await axios.post(`http://127.0.0.1:8000/api/logout`);
+    const data = await response.data;
+    if ((data.status = "success")) {
+      localStorage.clear();
+      window.location.href = "../../index.html";
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
+const products_nav = document.querySelector(".products-nav");
+products_nav.addEventListener("click", () => {
+  window.location.href = "admin.html";
+});
+const users_nav = document.querySelector(".user-nav");
+users_nav.addEventListener("click", () => {
+  window.location.href = "users_admin.html";
+});
+
 const labels = document.querySelectorAll(".label");
 labels.forEach((ele) => {
   let label_for = ele.getAttribute("for");

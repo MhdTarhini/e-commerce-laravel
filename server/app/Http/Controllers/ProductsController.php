@@ -29,7 +29,13 @@ class ProductsController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->category_id = $request->category_id;
-        $product->image = $request->image;
+         $imageName = null;
+    if ($request->hasFile('profile-image')) {
+            $image = $request->file('profile-image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('uploads/productsImages'), $imageName);
+        }
+        $product->image = $imageName;
         $product->save();
         return response()->json(['status' => 'success','product'=>$product]);
 

@@ -67,6 +67,7 @@ async function fetchItemsCart() {
     console.error(error);
   }
 }
+fetchItemsCart();
 async function fetchfavorites() {
   try {
     const response = await axios.get(
@@ -119,7 +120,7 @@ function ProductsHTML(id, image, name, description, price) {
                 <div>${price}$</div>
                 <div class="bottom">
                 <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round" id="fav-${id}"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                <div class="add-cart-${id}"><svg width="25px" height="25px" viewBox="0 0 24 24" fill="#fcfcfc" xmlns="http://www.w3.org/2000/svg" id="cart-${id}">
+                <div class="add-cart-${id}"><svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" id="cart-${id}">
 <g clip-path="url(#clip0_15_35)">
 <rect width="24" height="24" fill="none"/>
 <path d="M5.33331 6H19.8672C20.4687 6 20.9341 6.52718 20.8595 7.12403L20.1095 13.124C20.0469 13.6245 19.6215 14 19.1172 14H16.5555H9.44442H7.99998" stroke="#000000" stroke-linejoin="round"/>
@@ -151,6 +152,13 @@ function displayProducts(products) {
     );
     product_container.appendChild(div);
     const favorites = JSON.parse(localStorage.getItem("favorites"));
+    const items_cart = JSON.parse(localStorage.getItem("items_cart"));
+    let cart_btn = document.getElementById(`cart-${product.id}`);
+    items_cart.forEach((item) => {
+      if (item.id == product.id) {
+        cart_btn.setAttribute("fill", "#fcfcfc");
+      }
+    });
     const fav_btn = document.getElementById(`fav-${product.id}`);
     favorites.forEach((fav) => {
       if (fav.id == product.id) {
@@ -178,15 +186,12 @@ function displayProducts(products) {
           console.error(error);
         }
       }
-      window.location.reload();
     });
-    let cart_btn = document.getElementById(`cart-${product.id}`);
     cart_btn.addEventListener("click", async () => {
-      if (fav_btn.getAttribute("fill") == "#fcfcfc") {
-        ///remove_cart_items/{id?}"
+      if (cart_btn.getAttribute("fill") == "#fcfcfc") {
         try {
           await axios.delete(
-            `http://127.0.0.1:8000/apiremove_cart_items/${prduct.id}`
+            `http://127.0.0.1:8000/api/remove_cart_items/${prduct.id}`
           );
           cart_btn.setAttribute("fill", "none");
         } catch (error) {
