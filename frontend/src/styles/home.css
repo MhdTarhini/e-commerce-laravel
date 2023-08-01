@@ -19,7 +19,9 @@ html {
     background-position: center top;
     background-repeat: no-repeat;
     border-radius: 0px 0px 10px 10px;
+    flex-wrap: wrap;
 }
+
 
 
 .logo {
@@ -45,7 +47,44 @@ html {
     /* gap: 70px; */
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
+    }
+    
+    @media (max-width:497px) {
+        .navigation-side {
+            flex-direction: column;
+            gap:30px;
+            padding: 20px;
+        }
+        .profile-img{
+            display: none;
+        }
+        .nav-container{
+            flex-direction: column;
+        }
+        .logo {
+            text-align: center;
+        }
+        .top-page{
+         justify-content: center;
+         text-align: center;
+         width: 100%;
+         border: none;
+         gap:10px;
+         flex-wrap: wrap;
+ 
 
+        }
+        .navigation-side .cart-nav-sm{
+       display: flex;
+}
+
+    
+}
+
+
+.navigation-side .cart-nav-sm{
+    display: none;
 }
 
 .navigation-side div {
@@ -106,10 +145,10 @@ html {
     }
 } */
 
-.top-page {
+.top-page.top-page {
     display: flex;
     justify-content: space-between;
-    width: 30%;
+    min-width: 30%;
     margin: auto;
     padding: 20px;
     align-items: center;
@@ -134,7 +173,6 @@ html {
 }
 
 .product-card {
-
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -146,7 +184,7 @@ html {
     transition: height 2s;
 }
 
-.product-card:hover {
+.hover-effect:hover {
     width: 300px;
     height: 200px;
 }
@@ -180,6 +218,7 @@ html {
         background-size: cover;
         background-position: center top;
         background-repeat: no-repeat;
+
 }
 .bottom {
     display: flex;
@@ -219,4 +258,3 @@ html {
 .user-info-list div {
     cursor: pointer;
 }
-

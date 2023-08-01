@@ -51,6 +51,8 @@ Route::delete("/remove_fav/{product_id?}",[FavoritesController::class,"removePro
 Route::post("/add_item",[ItemsController::class,"addItem"]);
 Route::get("/add_interste/{user_id?}/{cat_id?}",[InterstesController::class,"addToInterest"]);
 
+Route::get("/get_product/{user_id?}/{product_id?}",[ProductsController::class,"getProduct"]);
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

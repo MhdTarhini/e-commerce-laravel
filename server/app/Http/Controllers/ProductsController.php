@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Favorite;
 use App\Models\Interest;
+use App\Models\Item;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use SebastianBergmann\CodeUnit\FunctionUnit;
@@ -88,5 +90,30 @@ function getUserFavorites($id) {
     return response()->json(['status' => 'success','user'=>$get_user_fav,"products"=>$products]);
     
 }
+// function getProduct($user_id,$product_id) {
+//     $product=Product::where("id",$product_id)->first();
+//     $fav_product=Favorite::where("product_id",$product_id)->first();
+//     if($fav_product){
+//         $fav_product->user_id=$user_id;
+//         $product->favorite=1;
+//     }else{
+//         $product->favorite=0;
+//     }
+//     // $is_item=Item::where("product_id",$product_id);
+//     // // $user_cart=
+//     // if($is_item->cart_id){
+//     //     $user_cart=$is_item->cart_id;
+//     //     $cart_id=Cart::where('id',$user_cart);
+//     //     if($cart_id->user_id=$user_id){
+//     //         $product->card=1;
+//     //     }else{
+//     //         $product->card=0;
+//     // }
+        
+//     // }
+
+//     return response()->json(['status' => 'success',"product"=>$product]);
+    
+// }
 }
 

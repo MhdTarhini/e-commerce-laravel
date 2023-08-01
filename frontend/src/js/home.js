@@ -20,6 +20,11 @@ document.querySelector(".cart-nav").addEventListener("click", () => {
 document.querySelector(".home-nav").addEventListener("click", () => {
   window.location.href = "home.html";
 });
+const sm_cart = document.querySelector(".cart-nav-sm");
+const viewportWidth = window.innerWidth;
+if (viewportWidth <= 497) {
+  sm_cart.classList.remove("none");
+}
 const user_info = document.querySelector(" .profile-img");
 const user_info_list = document.querySelector(".user-info-list");
 user_info.addEventListener("click", () => {
@@ -110,11 +115,11 @@ async function fetchCategories(path) {
 }
 
 function ProductsHTML(id, image, name, description, price) {
-  return `<div class="product-card">
+  return `
             <div class="top-side">
                 <img src=http://127.0.0.1:8000/uploads/ProductsImages/${image} alt="" srcset="">
             </div>
-            <div class="product-details none">
+            <div class="product-details none details-${id}">
                 <div>${name}</div>
                 <div>${description}</div>
                 <div>${price}$</div>
@@ -136,13 +141,14 @@ function ProductsHTML(id, image, name, description, price) {
 </svg></div>
                 </div>
             </div>
-        </div>`;
+        `;
 }
 const product_container = document.querySelector(".products-container");
 function displayProducts(products) {
   products.forEach((product) => {
     const div = document.createElement("div");
     div.classList.add("product-card");
+    div.classList.add("hover-effect");
     div.innerHTML = ProductsHTML(
       product.id,
       product.image,
@@ -151,6 +157,22 @@ function displayProducts(products) {
       product.price
     );
     product_container.appendChild(div);
+    const viewportWidth = window.innerWidth;
+    let product_details = document.querySelector(`.details-${product.id}`);
+    if (viewportWidth <= 497) {
+      div.classList.toggle("hover-effect");
+      div.addEventListener("click", () => {
+        product_details.style.zIndex = "1";
+      });
+      product_details.addEventListener("click", () => {
+        product_details.style.dislpay = "none";
+        console.log("hello");
+      });
+    }
+    // div.style.cursor = "pointer";
+    // div.addEventListener("click", () => {
+    //   window.location.href = `product_details.html?id=${product.id}`;
+    // });
     const favorites = JSON.parse(localStorage.getItem("favorites"));
     const items_cart = JSON.parse(localStorage.getItem("items_cart"));
     let cart_btn = document.getElementById(`cart-${product.id}`);
