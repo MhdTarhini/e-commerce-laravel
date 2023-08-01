@@ -52,15 +52,12 @@ document.querySelector(".sign-out").addEventListener("click", async () => {
 const urlSearchParams = new URLSearchParams(window.location.search);
 
 const page_param = urlSearchParams.get("page");
-console.log(page_param);
 document.querySelector(".all").addEventListener("click", () => {
   window.location.href = "../pages/home.html?page=all";
 });
 document.querySelector(".for-you").addEventListener("click", () => {
   window.location.href = "../pages/home.html?page=for-you";
 });
-console.log(userData.id);
-///get_cart_items/{id?}
 async function fetchItemsCart() {
   try {
     const response = await axios.get(
@@ -165,14 +162,9 @@ function displayProducts(products) {
         product_details.style.zIndex = "1";
       });
       product_details.addEventListener("click", () => {
-        product_details.style.dislpay = "none";
-        console.log("hello");
+        product_details.style.zIndex = "0";
       });
     }
-    // div.style.cursor = "pointer";
-    // div.addEventListener("click", () => {
-    //   window.location.href = `product_details.html?id=${product.id}`;
-    // });
     const favorites = JSON.parse(localStorage.getItem("favorites"));
     const items_cart = JSON.parse(localStorage.getItem("items_cart"));
     let cart_btn = document.getElementById(`cart-${product.id}`);

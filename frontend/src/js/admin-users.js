@@ -61,7 +61,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const reposnse = await axios.get("http://127.0.0.1:8000/api/get_all_users");
     const all_users = reposnse.data.users;
-    console.log(all_users);
     const users_container = document.querySelector(".user-container");
     all_users.forEach((user) => {
       const div = document.createElement("div");

@@ -84,7 +84,6 @@ async function singUp(event) {
         sign_up_data
       );
       localStorage.setItem("userData", JSON.stringify(response.data.user));
-      console.log(response);
       if (response.data.status === "success") {
         for (const ele of checkedCheckboxes) {
           if (ele.checked) {

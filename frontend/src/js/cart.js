@@ -84,7 +84,6 @@ function displayProducts(products) {
     const down_quantity = document.querySelector(`.down-${product.id}`);
     up_quantity.addEventListener("click", () => {
       UpdateQuantity(`up/${product.id}`);
-      console.log(product.id);
     });
     down_quantity.addEventListener("click", () => {
       UpdateQuantity(`down/${product.id}`);
