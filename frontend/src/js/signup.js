@@ -23,7 +23,7 @@ async function singUp(event) {
   }
 
   let valid_data = 0;
-  if (cpassword.value.length < 6) {
+  if (password.value.length < 6) {
     password.style.borderColor = "red";
     document.querySelector(".pass-error").classList.remove("none");
   } else {

@@ -52,7 +52,7 @@ class AuthController extends Controller
         'email' => 'required|string|email|max:255|unique:users',
         'password' => 'required|string|min:6',
         'address' => 'required|string|max:255',
-        'profile-image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048|null'
+        'profile-image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
     ]);
 
     $imageName = null;
