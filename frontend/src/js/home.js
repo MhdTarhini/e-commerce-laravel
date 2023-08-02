@@ -207,7 +207,7 @@ function displayProducts(products) {
       if (cart_btn.getAttribute("fill") == "#fcfcfc") {
         try {
           await axios.delete(
-            `http://127.0.0.1:8000/api/remove_cart_items/${prduct.id}`
+            `http://127.0.0.1:8000/api/remove_cart_items/${product.id}`
           );
           cart_btn.setAttribute("fill", "none");
         } catch (error) {
